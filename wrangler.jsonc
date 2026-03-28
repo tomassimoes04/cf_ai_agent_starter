@@ -30,12 +30,7 @@
 			}
 		]
 	},
-	"vectorize": [
-		{
-			"binding": "VECTORIZE",
-			"index_name": "rag-index"
-		}
-	],
+// vectorize removed
 	"d1_databases": [
 		{
 			"binding": "D1",
