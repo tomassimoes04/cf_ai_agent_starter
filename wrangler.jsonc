@@ -30,6 +30,19 @@
 			}
 		]
 	},
+	"vectorize": [
+		{
+			"binding": "VECTORIZE",
+			"index_name": "rag-index"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "D1",
+			"database_name": "rag-metadata",
+			"database_id": "7601ee0b-7557-4ad3-b5aa-7b67a8b817a2"
+		}
+	],
 	"migrations": [
 		{
 			"new_sqlite_classes": [

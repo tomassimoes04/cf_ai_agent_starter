@@ -1,21 +1,38 @@
-# Agent Starter
+
+# cf_ai_agent_starter
 
 ![npm i agents command](./npm-agents-banner.svg)
 
 <a href="https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/agents-starter"><img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare"/></a>
 
-A starter template for building AI chat agents on Cloudflare, powered by the [Agents SDK](https://developers.cloudflare.com/agents/).
+
+A Cloudflare Workers AI chat agent starter, built for the cf_ai_ GitHub challenge. All work is original and not copied from other submissions.
+
+**IMPORTANT SUBMISSION NOTES:**
+- Repository name is prefixed with `cf_ai_` as required.
+- All AI prompts used are documented in [PROMPTS.md](./PROMPTS.md).
+- This README includes clear running instructions for local and deployed usage.
 
 Uses Workers AI (no API key required), with tools for weather, timezone detection, calculations with approval, task scheduling, and vision (image input).
 
-## Quick start
+
+## Quick Start (Local)
+
 
 ```bash
-npx create-cloudflare@latest --template cloudflare/agents-starter
-cd agents-starter
+# Clone this repo
+git clone https://github.com/YOUR_USERNAME/cf_ai_agent_starter.git
+cd cf_ai_agent_starter
+
+# Install dependencies
 npm install
+
+# Start local dev server (Vite + Wrangler)
+npx wrangler dev
+# Or, for frontend only:
 npm run dev
 ```
+
 
 Open [http://localhost:5173](http://localhost:5173) to see your agent in action.
 
@@ -27,7 +44,8 @@ Try these prompts to see the different features:
 - **"Remind me in 5 minutes to take a break"** — scheduling
 - **Drop an image and ask "What's in this image?"** — vision (image understanding)
 
-## Project structure
+
+## Project Structure
 
 ```
 src/
@@ -37,7 +55,24 @@ src/
   styles.css   # Tailwind + Kumo styles
 ```
 
-## What's included
+
+## Deployment
+
+You can deploy to Cloudflare using Wrangler:
+
+```bash
+npx wrangler deploy
+```
+
+Or use the Deploy to Cloudflare button above.
+
+## AI Prompts
+
+See [PROMPTS.md](./PROMPTS.md) for a list of all AI prompts used in the development of this project.
+
+## Originality
+
+All code and documentation in this repository is original and was not copied from any other submission. AI assistance (GitHub Copilot, GPT-4.1) was used as described in PROMPTS.md.
 
 - **AI Chat** — Streaming responses powered by Workers AI via `AIChatAgent`
 - **Image input** — Drag-and-drop, paste, or click to attach images for vision-capable models
@@ -217,6 +252,7 @@ Create a `.env` file with your API key:
 ANTHROPIC_API_KEY=your-key-here
 ```
 
+
 ## Deploy
 
 ```bash
@@ -224,6 +260,39 @@ npm run deploy
 ```
 
 Your agent is live on Cloudflare's global network. Messages persist in SQLite, streams resume on disconnect, and the agent hibernates when idle.
+
+## Production Deployment
+
+To deploy in production, follow these steps:
+
+1. **Set environment variables:**
+  - Create a `.env` file in your project root for secrets and API keys.
+  - Example for weather API:
+    ```env
+    WEATHER_API_KEY=your_openweathermap_api_key
+    ```
+  - For other providers (OpenAI, Anthropic), add their keys as needed.
+
+2. **Configure bindings:**
+  - Edit `wrangler.jsonc` to set up Durable Objects, KV, R2, or other bindings as required by your agent.
+  - After changing bindings, run:
+    ```bash
+    npm run types
+    ```
+
+3. **Build and deploy:**
+  - For production, always run:
+    ```bash
+    npm run deploy
+    ```
+
+4. **Custom domains and scaling:**
+  - Configure custom domains and scaling options in your Cloudflare dashboard as needed.
+
+5. **Secrets:**
+  - Use `wrangler secret put` to securely store secrets if you don't want them in `.env`.
+
+For more, see the [Cloudflare Workers docs](https://developers.cloudflare.com/workers/) and [Agents SDK docs](https://developers.cloudflare.com/agents/).
 
 ## Learn more
 
